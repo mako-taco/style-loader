@@ -95,6 +95,14 @@ function listToStyles(list) {
 	return styles;
 }
 
+function bind(fn, ctx) {
+	var bindArgs = Array.prototype.slice.call(arguments, 2);
+	return function () {
+		var args = Array.prototype.slice.call(arguments);
+		fn.apply(ctx, bindArgs.concat(args));
+	}
+}
+
 function createStyleElement() {
 	var styleElement = document.createElement("style");
 	var head = getHeadElement();
@@ -117,8 +125,8 @@ function addStyle(obj, options) {
 	if (options.singleton) {
 		var styleIndex = singletonCounter++;
 		styleElement = singletonElement || (singletonElement = createStyleElement());
-		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		update = bind(applyToSingletonTag, null, styleElement, styleIndex, false);
+		remove = bind(applyToSingletonTag, null, styleElement, styleIndex, true);
 	} else if(obj.sourceMap &&
 		typeof URL === "function" &&
 		typeof URL.createObjectURL === "function" &&
@@ -126,7 +134,7 @@ function addStyle(obj, options) {
 		typeof Blob === "function" &&
 		typeof btoa === "function") {
 		styleElement = createLinkElement();
-		update = updateLink.bind(null, styleElement);
+		update = bind(updateLink, null, styleElement);
 		remove = function() {
 			styleElement.parentNode.removeChild(styleElement);
 			if(styleElement.href)
@@ -134,7 +142,7 @@ function addStyle(obj, options) {
 		};
 	} else {
 		styleElement = createStyleElement();
-		update = applyToTag.bind(null, styleElement);
+		update = bind(applyToTag, null, styleElement);
 		remove = function() {
 			styleElement.parentNode.removeChild(styleElement);
 		};
