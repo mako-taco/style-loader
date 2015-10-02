@@ -1,14 +1,14 @@
 {
-  "name": "style-loader",
-  "version": "0.13.0",
-  "author": "Tobias Koppers @sokra",
-  "description": "style loader module for webpack",
+  "name": "ie8-style-loader",
+  "version": "0.0.1",
+  "author": "Jake Scott",
+  "description": "style loader module for webpack, ie8 compatable. Fork of Tobias Koppers style-loader",
   "devDependencies": {
     "css-loader": "~0.8.0"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:webpack/style-loader.git"
+    "url": "git@github.com:mako-taco/style-loader.git"
   },
   "licenses": [
     {
