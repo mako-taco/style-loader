@@ -1,6 +1,6 @@
 {
   "name": "ie8-style-loader",
-  "version": "0.13.0",
+  "version": "0.0.1",
   "author": "Jake Scott",
   "description": "style loader module for webpack, ie8 compatable. Fork of Tobias Koppers style-loader",
   "devDependencies": {
